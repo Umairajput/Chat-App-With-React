@@ -95,7 +95,7 @@ function Login({value}) {
                             <button className="button" onClick={LoginForm}> Register </button>
                         </Link>
                 }
-                <p className='para'>Don't Have An Account ? <Link to="/Sidebar">Sign Up</Link> </p>
+                <p className='para'>Don't Have An Account ? <Link to="/">Sign Up</Link> </p>
                 {/* <div>
                     <GoogleLogin />
                 </div> */}
