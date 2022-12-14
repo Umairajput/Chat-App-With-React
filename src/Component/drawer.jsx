@@ -80,10 +80,10 @@ const Sidebar = () => {
     //     getItem('Option 8', '2', <DesktopOutlined />),
     //     getItem('Option 9', '3', <ContainerOutlined />),
     //     getItem('Option 10', '4', <PieChartOutlined />),
-    //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
-    //     getItem('Option 1', '21', <PieChartOutlined />),
-    //     getItem('Option 2', '2', <DesktopOutlined />),
+    //     getItem('Option 11', '5', <DesktopOutlined />),
+    //     getItem('Option 12', '6', <ContainerOutlined />),
+    //     getItem('Option 13', '21', <PieChartOutlined />),
+    //     getItem('Option 14', '2', <DesktopOutlined />),
     //     getItem('Option 3', '3', <ContainerOutlined />),
     //     getItem('Option 4', '4', <PieChartOutlined />),
     //     getItem('Option 5', '5', <DesktopOutlined />),
@@ -118,13 +118,13 @@ const Sidebar = () => {
             /> */}
            {curntUser == false ? null : <div>
                 <div>
-                    <img className='img' src={currentUser[0].image} />
-                    <span>{currentUser[0].name}</span>
+                    <img className='img' src={currentUser[0]?.image} />
+                    <span>{currentUser[0]?.name}</span>
                 </div>
             </div>}
             <div>
                 {
-                    users.map((v, i) => {
+                    users?.map((v, i) => {
                         return (
                             <div>
                                 <img className='img' src={v?.image} />

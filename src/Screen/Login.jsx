@@ -6,10 +6,10 @@ import Box from '@mui/material/Box';
 import { initializeApp } from "firebase/app";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {useDispatch} from "react-redux"
-import {LoginUserData} from "../Redux/Actions/action"
+import { useDispatch } from "react-redux"
+import { LoginUserData } from "../Redux/Actions/action"
 
-function Login({value}) {
+function Login({ value }) {
     const dispatch = useDispatch();
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
@@ -86,15 +86,7 @@ function Login({value}) {
                         />
                     </div>
                 </div>
-                {
-                    email === "" && password === ""
-                        ?
-                        <button className='button' onClick={error}>Login</button>
-                        :
-                        <Link to='/Sidebar'>
-                            <button className="button" onClick={LoginForm}> Register </button>
-                        </Link>
-                }
+                <button className="button" onClick={LoginForm}> Register </button>
                 <p className='para'>Don't Have An Account ? <Link to="/">Sign Up</Link> </p>
                 {/* <div>
                     <GoogleLogin />
