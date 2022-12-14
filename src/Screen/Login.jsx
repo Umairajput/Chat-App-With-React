@@ -91,7 +91,7 @@ function Login({value}) {
                         ?
                         <button className='button' onClick={error}>Login</button>
                         :
-                        <Link>
+                        <Link to='/Sidebar'>
                             <button className="button" onClick={LoginForm}> Register </button>
                         </Link>
                 }
