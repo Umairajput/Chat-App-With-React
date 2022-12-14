@@ -4,7 +4,6 @@ import { collection, query, where, onSnapshot } from "firebase/firestore";
 // import {db} from "../Screen/Signup";
 import { db, auth } from '../Firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
-
 import {
     ContainerOutlined,
     DesktopOutlined,
@@ -13,6 +12,7 @@ import {
     PieChartOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
+import Load from './spin';
 const currentUser = [];
 function getData() {
     const q = query(collection(db, "users"), where("id", "==", auth.currentUser.uid));
@@ -75,7 +75,7 @@ const Sidebar = () => {
     //     getItem('Option 3', '3', <ContainerOutlined />),
     //     getItem('Option 4', '4', <PieChartOutlined />),
     //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
+    //     getItem('Option 6', '6', <ContaihhnerOutlined />),
     //     getItem('Option 7', '21', <PieChartOutlined />),
     //     getItem('Option 8', '2', <DesktopOutlined />),
     //     getItem('Option 9', '3', <ContainerOutlined />),
@@ -116,7 +116,7 @@ const Sidebar = () => {
                 inlineCollapsed={collapsed}
                 items={items}
             /> */}
-           {curntUser == false ? null : <div>
+           {curntUser == false ? <Load/> : <div>
                 <div>
                     <img className='img' src={currentUser[0]?.image} />
                     <span>{currentUser[0]?.name}</span>
