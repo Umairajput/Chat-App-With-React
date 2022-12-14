@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
 import { collection, query, where, onSnapshot } from "firebase/firestore";
 // import {db} from "../Screen/Signup";
@@ -13,29 +13,39 @@ import {
     PieChartOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
-
-const getData = () => {
+const currentUser = [];
+function getData() {
     const q = query(collection(db, "users"), where("id", "==", auth.currentUser.uid));
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const cities = [];
         querySnapshot.forEach((doc) => {
-            cities.push(doc.data());
+            currentUser.push(doc.data());
         });
-        console.log("Current user ", cities);
+        console.log("Current user ", currentUser);
+    });
+}
+const users = [];
+function AllData() {
+    const q = query(collection(db, "users"), where("id", "!=", auth.currentUser.uid));
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            users.push(doc.data());
+        });
+        console.log("All user ", users);
     });
 }
 
 onAuthStateChanged(auth, (user) => {
     if (user) {
-        console.log(user)
+        // console.log(user)
+        AllData()
         getData()
-      const uid = user.uid;
-      // ...
+        const uid = user.uid;
+        // ...
     } else {
         console.log("Signout")
     }
-  });
-  
+});
+
 function getItem(label, key, icon, children, type) {
     return {
         key,
@@ -46,6 +56,7 @@ function getItem(label, key, icon, children, type) {
     };
 }
 const Sidebar = () => {
+    const [curntUser,setCurntUser] = useState(false)
     const [collapsed, setCollapsed] = useState(true);
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
@@ -55,6 +66,9 @@ const Sidebar = () => {
     // console.log("data===>",data)
     const name = state?.AllDataReducers?.loginInformation?.name;
     const imgURL = state?.AllDataReducers?.loginInformation?.image
+    setTimeout(()=>{
+        setCurntUser(true)
+    },5000)
     // const items = [
     //     getItem(name, '1', <img className='img' src={imgURL} />),
     //     getItem('Option 2', '2', <DesktopOutlined />),
@@ -81,7 +95,7 @@ const Sidebar = () => {
     //     getItem('Option 5', '5', <DesktopOutlined />),
     //     getItem('Option 6', '6', <ContainerOutlined />),
     // ];
-    
+
     return (
         <div
             style={{
@@ -102,18 +116,24 @@ const Sidebar = () => {
                 inlineCollapsed={collapsed}
                 items={items}
             /> */}
+           {curntUser == false ? null : <div>
+                <div>
+                    <img className='img' src={currentUser[0].image} />
+                    <span>{currentUser[0].name}</span>
+                </div>
+            </div>}
             <div>
                 {
-                    // state.map((v,i)=>{
-                    //     return(
-                    //         <div>
-                    //             <img className='img' src={v?.image}/>
-                    //             <span>{v?.name}</span>
-                    //         </div>
-                    //     )
-                    // })
+                    users.map((v, i) => {
+                        return (
+                            <div>
+                                <img className='img' src={v?.image} />
+                                <span>{v?.name}</span>
+                            </div>
+                        )
+                    })
                 }
-                {/* <button onClick={getData}>Click</button> */}
+                {/* <button onClick={AllData}>Click</button> */}
             </div>
         </div>
     );
