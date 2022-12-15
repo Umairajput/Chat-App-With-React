@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { MoreOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons"
 import { useSelector } from 'react-redux'
-import { collection, query, where, onSnapshot } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc, Timestamp } from "firebase/firestore";
 import { db, auth } from '../Firebase/firebase';
+import { async } from '@firebase/util';
 function Main() {
     const [curntUser, setCurntUser] = useState([])
     const [dataArray, setDataArray] = useState([])
     const [Name, setName] = useState()
     const [img, setImg] = useState()
     const [msg, setMsg] = useState()
-    const [inp, setInp] = useState()
+    const [messag,setMessag] = useState([])
     useEffect(() => {
         AllData();
         getData();
@@ -37,32 +38,56 @@ function Main() {
             setCurntUser(user)
         });
     }
-    console.log("All user ", dataArray);
-    console.log("Current user ", curntUser);
-    let currentID = auth.currentUser.uid
+    // console.log("All user ", dataArray);
+    // console.log("Current user ", curntUser);
+    let currentID = auth?.currentUser?.uid
     function Chat(name, id, image) {
         setName(name)
         setImg(image)
-        // if (id > currentID) {
-        //     console.log(id + currentID)
-        // } else {
-        //     console.log(currentID + id)
-        // }
+        if (id > currentID) {
+            localStorage.setItem("ids", id + currentID)
+            // console.log(getIds)
+        } else {
+            localStorage.setItem("ids", currentID + id)
+            // console.log(getIds)
+        }
         // console.log(id, currentID)
-        // console.log("Name in function",Name)
     }
     const show = () => {
         var el = document.getElementById("box");
         el.classList.toggle("show");
     }
-    const Send = () => {
-        setMsg(inp)
+    const Send = async () => {
+        setMsg("")
+        let ids = localStorage.getItem("ids")
+        // console.log(ids)
+        // Add a new document with a generated id.
+        const docRef = await addDoc(collection(db, "messages"), {
+            date: Timestamp.fromDate(new Date()),
+            message: msg,
+            myUid: currentID,
+            bothUid: ids,
+            messageType: "text",
+            messageStatus: "unread"
+        });
+        // console.log(msg)
+        // console.log("successFul")
+        // console.log("Document written with ID: ", docRef.id);
+        const q = query(collection(db, "messages"), where("bothUid", "==", ids))
+        let messages = [];
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                messages.push(doc.data());
+            });
+            // console.log("message", messages);
+        });
+        setMessag(messages)
     }
     return (
         <div className='body'>
             <div className="nav_icon">
                 {curntUser == false ? null : <div>
-                    <div className='member_div test '>
+                    <div className='member_div'>
                         <img className='img' src={curntUser[0]?.image} />
                         <span>{curntUser[0]?.name}</span>
                     </div>
@@ -82,7 +107,7 @@ function Main() {
                                 return (
                                     <div onClick={() => Chat(v.name, v.id, v.image)} key={i} className='member_div'>
                                         <img className='img' src={v?.image} />
-                                        <span >{v?.name}</span>
+                                        <span>{v?.name}</span>
                                     </div>
                                 )
                             })
@@ -94,7 +119,13 @@ function Main() {
                             <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
-                            <span>{msg}</span>
+                            {messag.map((v,i)=>{
+                                // console.log("msg====>",v.message)
+                                return(
+                                <h4>{v.message}</h4>
+                                )
+                            })
+                        }
                         </div>
                         <div>
                             <input className='inp' type="text" placeholder='Enter Message' value={inp} onChange={(e) => { setInp(e.target.value) }} />
