@@ -9,7 +9,7 @@ const UploadImage = () => {
     const onChange = ({ fileList: newFileList }) => {
         setFileList(newFileList);
         setTimeout(()=>{
-            imageUrl = fileList[0].thumbUrl
+            imageUrl = fileList[0]?.thumbUrl
             dispatch(ImageURL(imageUrl))
         },2000)
     };

@@ -13,38 +13,18 @@ import {
     PieChartOutlined,
 } from '@ant-design/icons';
 import { Button, Menu } from 'antd';
-const currentUser = [];
-function getData() {
-    const q = query(collection(db, "users"), where("id", "==", auth.currentUser.uid));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            currentUser.push(doc.data());
-        });
-        console.log("Current user ", currentUser);
-    });
-}
-const users = [];
-function AllData() {
-    const q = query(collection(db, "users"), where("id", "!=", auth.currentUser.uid));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-            users.push(doc.data());
-        });
-        console.log("All user ", users);
-    });
-}
 
-onAuthStateChanged(auth, (user) => {
-    if (user) {
-        // console.log(user)
-        AllData()
-        getData()
-        const uid = user.uid;
-        // ...
-    } else {
-        console.log("Signout")
-    }
-});
+// onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//         // console.log(user)
+
+//         // getData()
+//         const uid = user.uid;
+//         // ...
+//     } else {
+//         console.log("Signout")
+//     }
+// });
 
 function getItem(label, key, icon, children, type) {
     return {
@@ -56,46 +36,62 @@ function getItem(label, key, icon, children, type) {
     };
 }
 const Sidebar = () => {
-    const [curntUser,setCurntUser] = useState(false)
+    const [curntUser, setCurntUser] = useState([])
     const [collapsed, setCollapsed] = useState(true);
+    const [dataArray, setDataArray] = useState([])
+    const [Name, setName] = useState()
     const toggleCollapsed = () => {
         setCollapsed(!collapsed);
     };
+    useEffect(() => {
+        AllData();
+        getData();
+    }, [])
     const state = useSelector((state) => state?.AllDataReducers?.loginInformation)
     // console.log("state", state)
     // console.log("data===>",data)
     const name = state?.AllDataReducers?.loginInformation?.name;
     const imgURL = state?.AllDataReducers?.loginInformation?.image
-    setTimeout(()=>{
-        setCurntUser(true)
-    },5000)
-    // const items = [
-    //     getItem(name, '1', <img className='img' src={imgURL} />),
-    //     getItem('Option 2', '2', <DesktopOutlined />),
-    //     getItem('Option 3', '3', <ContainerOutlined />),
-    //     getItem('Option 4', '4', <PieChartOutlined />),
-    //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
-    //     getItem('Option 7', '21', <PieChartOutlined />),
-    //     getItem('Option 8', '2', <DesktopOutlined />),
-    //     getItem('Option 9', '3', <ContainerOutlined />),
-    //     getItem('Option 10', '4', <PieChartOutlined />),
-    //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
-    //     getItem('Option 1', '21', <PieChartOutlined />),
-    //     getItem('Option 2', '2', <DesktopOutlined />),
-    //     getItem('Option 3', '3', <ContainerOutlined />),
-    //     getItem('Option 4', '4', <PieChartOutlined />),
-    //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
-    //     getItem('Option 7', '12', <PieChartOutlined />),
-    //     getItem('Option 8', '2', <DesktopOutlined />),
-    //     getItem('Option 9', '3', <ContainerOutlined />),
-    //     getItem('Option 10', '4', <PieChartOutlined />),
-    //     getItem('Option 5', '5', <DesktopOutlined />),
-    //     getItem('Option 6', '6', <ContainerOutlined />),
-    // ];
 
+    function AllData() {
+        // setDataArray([])
+        // console.log("data",data,data.length)
+        let data = []
+        const q = query(collection(db, "users"), where("id", "!=", auth?.currentUser?.uid));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot?.forEach((doc) => {
+                // console.log('doc.data()',doc?.data())
+                data.push(doc?.data())
+            });
+            setDataArray(data)
+        });
+    }
+    function getData() {
+        let user = [];
+        const q = query(collection(db, "users"), where("id", "==", auth?.currentUser?.uid));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                user.push(doc.data());
+            });
+            // console.log("doc.data()")
+            setCurntUser(user)
+            // console.log("cuuuuuu===>",currentUser)
+        });
+    }
+    console.log("All user ", dataArray);
+    console.log("Current user ", curntUser);
+    let currentID = auth.currentUser.uid
+    function Chat(name, id) {
+        setName(name)
+        // if (id > currentID) {
+        //     console.log(id + currentID)
+        // } else {
+        //     console.log(currentID + id)
+        // }
+        // console.log(id, currentID)
+        // console.log("Name in function",Name)
+    }
+    // console.log("Name in out of function",Name)
     return (
         <div
             style={{
@@ -103,12 +99,7 @@ const Sidebar = () => {
             }}
             className='sidebar_div'
         >
-            <Button
-                type="primary"
-                onClick={toggleCollapsed}
-            >
-                {collapsed ? <MenuUnfoldOutlined className='unfold' /> : <MenuFoldOutlined className='fold' />}
-            </Button>
+            {/*   */}
             {/* <Menu
                 defaultSelectedKeys={['1']}
                 defaultOpenKeys={['sub1']}
@@ -116,24 +107,32 @@ const Sidebar = () => {
                 inlineCollapsed={collapsed}
                 items={items}
             /> */}
-           {curntUser == false ? null : <div>
-                <div>
-                    <img className='img' src={currentUser[0].image} />
-                    <span>{currentUser[0].name}</span>
+            {/* <div>
+                <h1>Profile</h1>
+            </div> */}
+            {curntUser == false ? null : <div>
+                <div className='member_div'>
+                    <img className='img' src={curntUser[0]?.image} />
+                    <span>{curntUser[0]?.name}</span>
                 </div>
             </div>}
-            <div>
-                {
-                    users.map((v, i) => {
-                        return (
-                            <div>
-                                <img className='img' src={v?.image} />
-                                <span>{v?.name}</span>
-                            </div>
-                        )
-                    })
-                }
-                {/* <button onClick={AllData}>Click</button> */}
+            <br /><br /><br /><br />
+            <div className='main_div'>
+                <div className='members_main_div'>
+                    {
+                        dataArray.map((v, i) => {
+                            return (
+                                <div onClick={() => Chat(v.name, v.id)} key={i} className='member_div'>
+                                    <img className='img' src={v?.image} />
+                                    <span >{v?.name}</span>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+                <div>
+                    <h1>{Name}</h1>
+                </div>
             </div>
         </div>
     );

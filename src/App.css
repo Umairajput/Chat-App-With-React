@@ -79,11 +79,6 @@
 .ant-menu-item, .ant-menu-item-selected{
   padding-left: 8px !important;
 }
-.img{
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-}
 .fold {
   text-align: end;
   width: 108px !important;
@@ -248,7 +243,35 @@ label{
   padding: 0 1rem;
   background-color: #eee;
 }
-
+/* .members_main_div{
+  width: 100%;
+} */
+.main_div{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.member_div{
+  display: flex;
+  justify-content: space-evenly;
+  height: 60px;
+  width: 250px;
+  border-radius: 10px;
+  background-color: #76d0ff;
+  /* border: 1px solid black; */
+  margin-top: 20px;
+  cursor: pointer;
+}
+.member_div span {
+  color: white;
+  font-size: 25px;
+  font-family: cur;
+}
+.img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+}
 @media only screen and (max-width: 950px) {
   .container {
     padding: 10px 18px 12px 10px;
