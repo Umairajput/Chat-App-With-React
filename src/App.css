@@ -30,7 +30,7 @@
 .nav_icon {
   display: flex;
   justify-content: space-between;
-  margin: 20px 15px 5px 15px;
+  padding: 20px 15px 5px 15px;
 }
 
 .nav_icon .more {
@@ -269,40 +269,40 @@ label {
 
 .main_div {
   display: flex;
-  justify-content: space-evenly;
   width: 100%;
+  margin-top: 20px;
 }
 
 .members_main_div {
-  width: 50%;
+  width: 20%;
 }
 
 .chat_main_div {
-  width: 50%;
-  /* margin-left: 100px; */
+  width: 90%;
+  margin-left: 20px;
 }
 
 .chat_navbar {
-  /* width: 100%; */
-  /* background-color: yellow; */
+  width: 95.5%;
+  margin-top: 10px;
+  background-color: hsl(196deg 100% 69%);
 }
 
 .member_div {
   display: flex;
   justify-content: space-evenly;
   height: 60px;
-  width: 250px;
+  width: 18vmax;
   border-radius: 10px;
   background-color: #76d0ff;
-  /* border: 1px solid black; */
-  margin-top: 20px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
 .member_div span {
   color: white;
   font-size: 25px;
-  font-family: cur;
+  font-family: cursive;
 }
 
 .img {
@@ -310,8 +310,38 @@ label {
   width: 50px;
   border-radius: 50%;
 }
-.test{
+
+.chat_div {
+  width: 95.5%;
+  height: 60vh;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
+.inp {
+  outline: none;
+  height: 30px;
+  width: 89%;
+  padding-left: 10px;
+}
+
+.btn {
+  height: 34px;
+  width: 7%;
+  border: none;
+  border-radius: 3px;
+}
+
+.test {
   margin-top: 0px !important;
+  margin-left: -13px !important;
+}
+
+.body {
+  background-color: hsl(196deg 100% 94%);
+  height: 100vh;
+  margin-top: 0px;
 }
 
 @media only screen and (max-width: 950px) {
