@@ -8,6 +8,8 @@ function Main() {
     const [dataArray, setDataArray] = useState([])
     const [Name, setName] = useState()
     const [img, setImg] = useState()
+    const [msg, setMsg] = useState()
+    const [inp,setInp] = useState()
     useEffect(() => {
         AllData();
         getData();
@@ -53,6 +55,9 @@ function Main() {
         var el = document.getElementById("box");
         el.classList.toggle("show");
     }
+    const Send = () => {
+        setMsg(inp)
+    }
     return (
         <>
             <div className="nav_icon">
@@ -70,7 +75,6 @@ function Main() {
                 <MoreOutlined className="more" />
             </div>
                 <div>
-                    <br /><br /><br /><br />
                     <div className='main_div'>
                         <div className='members_main_div'>
                             {
@@ -88,6 +92,13 @@ function Main() {
                             <div className='chat_navbar' style={{ display: 'flex' }}>
                                 <img className='img' src={img} />
                                 <h1>{Name}</h1>
+                            </div>
+                            <div className='chat_div'>
+                                <span>{msg}</span>
+                            </div>
+                            <div>
+                                <input className='inp' type="text" placeholder='Enter Message' value={inp} onChange={(e)=> {setInp(e.target.value)}} />
+                                <button className='btn' onClick={Send}>Send</button>
                             </div>
                         </div>
                     </div>
