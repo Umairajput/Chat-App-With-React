@@ -56,6 +56,12 @@ function Main() {
     return (
         <>
             <div className="nav_icon">
+            {curntUser == false ? null : <div>
+                        <div className='member_div'>
+                            <img className='img' src={curntUser[0]?.image} />
+                            <span>{curntUser[0]?.name}</span>
+                        </div>
+                    </div>}
                 <h2 className="conver_nav">Conversations</h2>
                 <div className="container">
                     <input type="text" id="box" placeholder="Search a friend" className="search__box " onClick={show} />
@@ -64,12 +70,6 @@ function Main() {
                 <MoreOutlined className="more" />
             </div>
                 <div>
-                    {curntUser == false ? null : <div>
-                        <div className='member_div'>
-                            <img className='img' src={curntUser[0]?.image} />
-                            <span>{curntUser[0]?.name}</span>
-                        </div>
-                    </div>}
                     <br /><br /><br /><br />
                     <div className='main_div'>
                         <div className='members_main_div'>
