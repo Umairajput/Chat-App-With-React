@@ -120,7 +120,7 @@ function Main() {
                         </div>
                         <div className='chat_div'>
                             {messag.map((v,i)=>{
-                                console.log("msg====>",v.message)
+                                // console.log("msg====>",v.message)
                                 return(
                                 <h4>{v.message}</h4>
                                 )
