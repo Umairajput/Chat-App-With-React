@@ -245,29 +245,28 @@ label{
 }
 .main_div{
   display: flex;
-  justify-content: space-evenly;
   width: 100%;
 }
 .members_main_div{
-  width: 50%;
+  width: 20%;
 }
 .chat_main_div{
-  width: 50%;
+  width: 90%;
   /* margin-left: 100px; */
 }
 .chat_navbar{
   /* width: 100%; */
-  /* background-color: yellow; */
+  background-color: pink;
 }
 .member_div{
   display: flex;
   justify-content: space-evenly;
   height: 60px;
-  width: 250px;
+  width: 100%;
   border-radius: 10px;
   background-color: #76d0ff;
   /* border: 1px solid black; */
-  margin-top: 20px;
+  /* margin-top: 20px; */
   cursor: pointer;
 }
 .member_div span {
