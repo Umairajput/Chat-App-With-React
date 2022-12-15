@@ -57,7 +57,7 @@ function Main() {
         <>
             <div className="nav_icon">
             {curntUser == false ? null : <div>
-                        <div className='member_div'>
+                        <div className='member_div test '>
                             <img className='img' src={curntUser[0]?.image} />
                             <span>{curntUser[0]?.name}</span>
                         </div>
