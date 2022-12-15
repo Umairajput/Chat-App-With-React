@@ -17,14 +17,20 @@
   padding-top: 20px;
   padding-bottom: 10px;
 }
-.MuiInputBase-root, .MuiOutlinedInput-root, .MuiInputBase-colorPrimary, .MuiInputBase-formControl, .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root{
+
+.MuiInputBase-root,
+.MuiOutlinedInput-root,
+.MuiInputBase-colorPrimary,
+.MuiInputBase-formControl,
+.css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
   width: 280px !important;
   border-radius: 5px !important;
 }
+
 .nav_icon {
   display: flex;
   justify-content: space-between;
-  margin: 20px 15px 5px 15px;
+  padding: 20px 15px 5px 15px;
 }
 
 .nav_icon .more {
@@ -76,9 +82,12 @@
 .unfold {
   width: 48px !important;
 }
-.ant-menu-item, .ant-menu-item-selected{
+
+.ant-menu-item,
+.ant-menu-item-selected {
   padding-left: 8px !important;
 }
+
 .fold {
   text-align: end;
   width: 108px !important;
@@ -118,26 +127,37 @@
   color: white;
   font-size: 15px;
 }
-.MuiInputBase-input, .MuiOutlinedInput-input, .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+
+.MuiInputBase-input,
+.MuiOutlinedInput-input,
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
   height: 20px !important;
   border-radius: 5px !important;
   border: none !important;
   color: white !important;
 }
-.MuiOutlinedInput-notchedOutline, .css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+
+.MuiOutlinedInput-notchedOutline,
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
   border: 1px solid white !important;
 }
-.MuiInputBase-input, .MuiOutlinedInput-input, .css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus{
+
+.MuiInputBase-input,
+.MuiOutlinedInput-input,
+.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input:focus {
   outline: none !important;
   border: none !important;
 }
-label{
+
+label {
   color: white !important;
   border-radius: 5px !important;
 }
-.text{
+
+.text {
   margin-bottom: 30px;
 }
+
 .button:hover {
   background-color: var(--main-bg-color);
   transition: 0.3s;
@@ -173,6 +193,7 @@ label{
   margin: 0px auto;
   padding-top: 12px;
 }
+
 .google:hover {
   background-color: var(--main-bg-color);
   transition: 0.3s;
@@ -181,11 +202,13 @@ label{
   border: none;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.google_icon{
+
+.google_icon {
   font-size: 27px;
   position: relative;
   bottom: 3px;
 }
+
 .container {
   margin-top: 16px;
   margin-left: 20%;
@@ -243,64 +266,83 @@ label{
   padding: 0 1rem;
   background-color: #eee;
 }
-.main_div{
+
+.main_div {
   display: flex;
   width: 100%;
   margin-top: 20px;
 }
-.members_main_div{
+
+.members_main_div {
   width: 20%;
 }
-.chat_main_div{
+
+.chat_main_div {
   width: 90%;
-  /* margin-left: 100px; */
+  margin-left: 20px;
 }
-.chat_navbar{
-  /* width: 100%; */
+
+.chat_navbar {
+  width: 95.5%;
   margin-top: 10px;
-  background-color: pink;
+  background-color: hsl(196deg 100% 69%);
 }
-.member_div{
+
+.member_div {
   display: flex;
   justify-content: space-evenly;
   height: 60px;
-  width: 100%;
+  width: 18vmax;
   border-radius: 10px;
   background-color: #76d0ff;
-  /* border: 1px solid black; */
   margin-top: 10px;
   cursor: pointer;
 }
+
 .member_div span {
   color: white;
   font-size: 25px;
   font-family: cursive;
 }
-.img{
+
+.img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
 }
-.chat_div{
-  width: 100%;
+
+.chat_div {
+  width: 95.5%;
   height: 60vh;
-  /* margin-top: 20px; */
-  background-color: yellow;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: white;
 }
+
 .inp {
+  outline: none;
   height: 30px;
-  width: 92%;
-}
-.msg{
-  float: right;
+  width: 89%;
+  padding-left: 10px;
 }
 .btn {
   height: 34px;
   width: 7%;
-  border: 2px solid black;
+  border: none;
   border-radius: 3px;
-  margin-left: 3px;
 }
+
+.test {
+  margin-top: 0px !important;
+  margin-left: -13px !important;
+}
+
+.body {
+  background-color: hsl(196deg 100% 94%);
+  height: 100vh;
+  margin-top: 0px;
+}
+
 @media only screen and (max-width: 950px) {
   .container {
     padding: 10px 18px 12px 10px;
@@ -313,7 +355,7 @@ label{
     padding: 0 0.9rem;
 
   }
-  
+
   .show {
 
     width: 63%;
