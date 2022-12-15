@@ -243,13 +243,21 @@ label{
   padding: 0 1rem;
   background-color: #eee;
 }
-/* .members_main_div{
-  width: 100%;
-} */
 .main_div{
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   width: 100%;
+}
+.members_main_div{
+  width: 50%;
+}
+.chat_main_div{
+  width: 50%;
+  /* margin-left: 100px; */
+}
+.chat_navbar{
+  width: 100%;
+  /* background-color: yellow; */
 }
 .member_div{
   display: flex;

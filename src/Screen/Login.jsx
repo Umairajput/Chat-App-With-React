@@ -25,7 +25,6 @@ function Login({ value }) {
     };
     const app = initializeApp(firebaseConfig);
     const db = getFirestore()
-    let name;
     const LoginForm = () => {
         const auth = getAuth();
         signInWithEmailAndPassword(auth, email, password)
