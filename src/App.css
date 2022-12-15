@@ -283,9 +283,23 @@ label {
 }
 
 .chat_navbar {
-  width: 95.5%;
+  width: 93%;
   margin-top: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
   background-color: hsl(196deg 100% 69%);
+}
+
+.chat_navbar .h2 {
+  margin-top: 7px;
+  margin-left: 12px;
+  color: white;
+}
+
+.send svg {
+  width: 20px !important;
+  height: 18px;
 }
 
 .member_div {
@@ -309,6 +323,7 @@ label {
   height: 50px;
   width: 50px;
   border-radius: 50%;
+  background-color: white;
 }
 
 .chat_div {
@@ -317,19 +332,41 @@ label {
   margin-top: 20px;
   margin-bottom: 10px;
   background-color: white;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(196deg 100% 69%);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(196deg 100% 94%);
 }
 
 .inp {
+  border: 1px solid hsl(196deg 100% 94%);
   outline: none;
   height: 30px;
-  width: 89%;
+  width: 87.5%;
   padding-left: 10px;
 }
 
 .btn {
-  height: 34px;
+  height: 35px;
   width: 7%;
   border: none;
+  background-color: white ;
+  margin-left: -1px;
   border-radius: 3px;
 }
 

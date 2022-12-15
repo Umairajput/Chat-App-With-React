@@ -90,15 +90,15 @@ function Main() {
                     </div>
                     <div className='chat_main_div'>
                         <div className='chat_navbar' style={{ display: 'flex' }}>
-                            <img className='img' src={img} />
-                            <h1>{Name}</h1>
+                            <img className='img nav_img' src={img} />
+                            <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
                             <span>{msg}</span>
                         </div>
                         <div>
                             <input className='inp' type="text" placeholder='Enter Message' value={inp} onChange={(e) => { setInp(e.target.value) }} />
-                            <button className='btn' onClick={Send}><SendOutlined /></button>
+                            <button className='btn' onClick={Send}><SendOutlined className='send'/></button>
                         </div>
                     </div>
                 </div>
