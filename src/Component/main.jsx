@@ -87,7 +87,7 @@ function Main() {
         <div className='body'>
             <div className="nav_icon">
                 {curntUser == false ? null : <div>
-                    <div className='member_div'>
+                    <div className='member_div test'>
                         <img className='img' src={curntUser[0]?.image} />
                         <span>{curntUser[0]?.name}</span>
                     </div>
@@ -107,7 +107,7 @@ function Main() {
                                 return (
                                     <div onClick={() => Chat(v.name, v.id, v.image)} key={i} className='member_div'>
                                         <img className='img' src={v?.image} />
-                                        <span>{v?.name}</span>
+                                        <span >{v?.name}</span>
                                     </div>
                                 )
                             })
