@@ -18,18 +18,18 @@ function Main() {
         AllData();
         getData();
     }, [])
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // getMessages()
-          // ...
-        } else {
-          // User is signed out
-          // ...
-        }
-      });
+    // onAuthStateChanged(auth, (user) => {
+    //     if (user) {
+    //       // User is signed in, see docs for a list of available properties
+    //       // https://firebase.google.com/docs/reference/js/firebase.User
+    //     const uid = user.uid;
+    //     // getMessages()
+    //       // ...
+    //     } else {
+    //       // User is signed out
+    //       // ...
+    //     }
+    //   });
     const state = useSelector((state) => state?.AllDataReducers?.loginInformation)
     const name = state?.AllDataReducers?.loginInformation?.name;
     const imgURL = state?.AllDataReducers?.loginInformation?.image
@@ -82,26 +82,26 @@ function Main() {
             date: Timestamp.fromDate(new Date()),
             message: msg,
             myUid: currentID,
-            // bothUid: bothId,
+            bothUid: bothId,
             messageType: "text",
             messageStatus: "unread"
         });
-        // console.log(msg)
-        // console.log("successFul")
-        // console.log("Document written with ID: ", docRef.id);
+        console.log(msg)
+        console.log("successFul")
+        console.log("Document written with ID: ", docRef.id);
     }
     // console.log("ids",ids)
-    // function getMessages() {
-    //     const q = query(collection(db, "messages"), where("bothUid", "==", bothId))
-    //     let messages = [];
-    //     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-    //         querySnapshot.forEach((doc) => {
-    //             messages.push(doc.data());
-    //         });
-    //         // console.log("message", messages);
-    //     });
-    //     setMessag(messages)
-    // }
+    function getMessages() {
+        const q = query(collection(db, "messages"), where("bothUid", "==", bothId))
+        let messages = [];
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                messages.push(doc.data());
+            });
+            // console.log("message", messages);
+        });
+        setMessag(messages)
+    }
     return (
         <div className='body'>
             <div className="nav_icon">
