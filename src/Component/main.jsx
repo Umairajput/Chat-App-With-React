@@ -12,8 +12,8 @@ function Main() {
     const [Name, setName] = useState()
     const [img, setImg] = useState()
     const [msg, setMsg] = useState()
-    const [messag,setMessag] = useState([])
-    // const [ids,setIds] = useState("")
+    const [messages,setMessages] = useState([])
+    const [ids,setIds] = useState("")
     useEffect(() => {
         AllData();
         getData();
@@ -72,9 +72,23 @@ function Main() {
         var el = document.getElementById("box");
         el.classList.toggle("show");
     }
+    // let messages = [];
+    function getMessages() {
+        const q = query(collection(db, "messages"), where("bothUid", "==", ids))
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                setMessages(doc.data())
+            });
+            // console.log("message", messages);
+        });
+        // setMessag(messages)
+    }
+    console.log("messages",messages)
     const Send = async () => {
-        let bothId = localStorage.getItem("ids")
-        console.log(bothId)
+        let bothId = (localStorage.getItem("ids"))
+        // console.log("bothId====>77",bothId)
+        setIds(bothId)
+        // console.log("ids===> 79",ids)
         setMsg("")
         // console.log(ids)
         // Add a new document with a generated id.
@@ -82,26 +96,16 @@ function Main() {
             date: Timestamp.fromDate(new Date()),
             message: msg,
             myUid: currentID,
-            bothUid: bothId,
+            bothUid: ids,
             messageType: "text",
             messageStatus: "unread"
         });
-        console.log(msg)
-        console.log("successFul")
-        console.log("Document written with ID: ", docRef.id);
+        // console.log(msg)
+        // console.log("successFul")
+        // console.log("Document written with ID: ", docRef.id);
+        getMessages();
     }
     // console.log("ids",ids)
-    function getMessages() {
-        const q = query(collection(db, "messages"), where("bothUid", "==", bothId))
-        let messages = [];
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                messages.push(doc.data());
-            });
-            // console.log("message", messages);
-        });
-        setMessag(messages)
-    }
     return (
         <div className='body'>
             <div className="nav_icon">
@@ -138,13 +142,13 @@ function Main() {
                             <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
-                            {messag.map((v,i)=>{
+                            {/* {messages.map((v,i)=>{
                                 // console.log("msg====>",v.message)
                                 return(
                                 <h4>{v?.message}</h4>
                                 )
                             })
-                        }
+                        } */}
                         </div>
                         <div>
                             <input className='inp' type="text" placeholder='Enter Message' value={msg} onChange={(e) => { setMsg(e.target.value) }} />
