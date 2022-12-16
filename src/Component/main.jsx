@@ -128,7 +128,7 @@ function Main() {
                         }
                         </div>
                         <div>
-                            <input className='inp' type="text" placeholder='Enter Message' value={inp} onChange={(e) => { setInp(e.target.value) }} />
+                            <input className='inp' type="text" placeholder='Enter Message' value={msg} onChange={(e) => { setMsg(e.target.value) }} />
                             <button className='btn' onClick={Send}><SendOutlined className='send'/></button>
                         </div>
                     </div>
