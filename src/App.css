@@ -270,11 +270,12 @@ label {
 .main_div {
   display: flex;
   width: 100%;
-  margin-top: 20px;
 }
 
 .members_main_div {
-  width: 20%;
+  width: 25%;
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .chat_main_div {
@@ -283,64 +284,95 @@ label {
 }
 
 .chat_navbar {
-  width: 95.5%;
+  width: 93%;
   margin-top: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
   background-color: hsl(196deg 100% 69%);
+}
+
+.chat_navbar .h2 {
+  margin-top: 7px;
+  margin-left: 12px;
+  color: white;
+}
+
+.send svg {
+  width: 20px !important;
+  height: 18px;
 }
 
 .member_div {
   display: flex;
-  justify-content: space-evenly;
-  height: 60px;
+  height: 52px;
   width: 18vmax;
+  margin-left: 10px !important;
   border-radius: 10px;
   background-color: #76d0ff;
   margin-top: 10px;
+  padding: 5px;
   cursor: pointer;
 }
 
 .member_div span {
   color: white;
   font-size: 25px;
-  font-family: cursive;
+  font-family:sans-serif;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .img {
   height: 50px;
   width: 50px;
   border-radius: 50%;
-}
-
-.chat_div {
-  width: 95.5%;
-  height: 60vh;
-  margin-top: 20px;
-  margin-bottom: 10px;
   background-color: white;
 }
 
+.chat_div {
+  width: 94%;
+  height: 60vh;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
 .inp {
+  border: 1px solid hsl(196deg 100% 94%);
   outline: none;
-  height: 30px;
-  width: 89%;
+  height: 44px;
+  width: 87.5%;
   padding-left: 10px;
 }
+
 .btn {
-  height: 34px;
-  width: 7%;
+  height: 44px;
+  width: 5%;
   border: none;
-  border-radius: 3px;
+  margin-top: 0px;
+  background-color: hsl(196deg 100% 69%);
+  margin-left: -1px;
+  border-bottom-right-radius: 25px;
+  border-right: outset;
+  border-top-right-radius: 25px;
 }
 
 .test {
   margin-top: 0px !important;
-  margin-left: -13px !important;
+  margin-left: -4px !important;
 }
 
 .body {
   background-color: hsl(196deg 100% 94%);
-  height: 100vh;
+  height: 110vh;
   margin-top: 0px;
+  width: 100vw;
 }
 
 @media only screen and (max-width: 950px) {
@@ -353,11 +385,9 @@ label {
   .container:hover>.search__box {
     width: 63%;
     padding: 0 0.9rem;
-
   }
 
   .show {
-
     width: 63%;
     padding: 0 0.9rem;
   }
