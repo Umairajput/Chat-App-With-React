@@ -15,7 +15,7 @@ const ImageURL = (ImagePath) => async (dispatch) => {
     })
 }
 const MessageList = (AllMessages) => async (dispatch) => {
-    console.log("actionData",AllMessages)
+    // console.log("actionData",AllMessages)
     dispatch({
         type: MESSAGE_LIST,
         payload: AllMessages

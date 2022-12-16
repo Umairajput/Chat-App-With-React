@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { MoreOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons"
 import { useSelector } from 'react-redux'
-import { collection, query, where, onSnapshot, addDoc, Timestamp } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc, Timestamp,getDocs } from "firebase/firestore";
 import { db, auth } from '../Firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
@@ -16,6 +16,7 @@ function Main() {
     const [messages, setMessages] = useState([])
     const [getMessageList, setGetMessageList] = useState([])
     const dispatch = useDispatch()
+    // console.log(state)
     // const [ids, setIds] = useState("")
     useEffect(() => {
         AllData();
@@ -33,9 +34,10 @@ function Main() {
     //       // ...
     //     }
     //   });
-    const state = useSelector((state) => state?.AllDataReducers?.loginInformation)
-    const name = state?.AllDataReducers?.loginInformation?.name;
-    const imgURL = state?.AllDataReducers?.loginInformation?.image
+    // const state = useSelector((state) => state?.MessageListReducer?.AllMessages)
+    // console.log("state===>",state)
+    // const name = state?.AllDataReducers?.loginInformation?.name;
+    // const imgURL = state?.AllDataReducers?.loginInformation?.image
     function AllData() {
         let data = []
         const q = query(collection(db, "users"), where("id", "!=", auth?.currentUser?.uid));
@@ -109,6 +111,7 @@ function Main() {
             querySnapshot.forEach((doc) => {
                 // console.log(doc.data())
                 messag.push(doc.data())
+                console.log("message===>",messag)
                 dispatch(MessageList(messag))
                 // localStorage.setItem("messageList", JSON.stringify(messag))
                 // console.log("messag", ...messag)
@@ -161,13 +164,13 @@ function Main() {
                             <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
-                            {getMessageList.map((v, i) => {
+                            {/* {getMessageList.map((v, i) => {
                                 // console.log("msg====>",v.message)
                                 return (
                                     <h4>{v?.message}</h4>
                                 )
                             })
-                            }
+                            } */}
                         </div>
                         <div>
                             <input className='inp' type="text" placeholder='Enter Message' value={msg} onChange={(e) => { setMsg(e.target.value) }} />

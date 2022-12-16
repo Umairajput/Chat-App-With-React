@@ -32,10 +32,10 @@ const ImageUrlReducer = (state = initialState, action) => {
 const MessageListReducer = (state = [], action) => {
     switch (action.type) {
         case MESSAGE_LIST:
-            console.log("ReducerData", action.payload)
+            // console.log("ReducerData", action.payload)
             return {
                 ...state,
-                ImagePath: action.payload
+                AllMessages: action.payload
             }
         default: return state
     }
