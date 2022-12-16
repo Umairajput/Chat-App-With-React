@@ -301,6 +301,7 @@ label {
 .send svg {
   width: 20px !important;
   height: 18px;
+  color: #e9eef5;
 }
 
 .member_div {
@@ -360,6 +361,7 @@ label {
   margin-left: -1px;
   border-bottom-right-radius: 25px;
   border-right: outset;
+  cursor: pointer;
   border-top-right-radius: 25px;
 }
 
