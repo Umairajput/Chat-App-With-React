@@ -1,6 +1,7 @@
 import {
     LOGIN_DATA,
-    IMAGE_URL
+    IMAGE_URL,
+    MESSAGE_LIST
 } from '../types';
 
 const initialState={
@@ -28,4 +29,15 @@ const ImageUrlReducer = (state = initialState, action) => {
         default: return state
     }
 }
-export { AllDataReducers, ImageUrlReducer }
+const MessageListReducer = (state = [], action) => {
+    switch (action.type) {
+        case MESSAGE_LIST:
+            console.log("ReducerData", action.payload)
+            return {
+                ...state,
+                ImagePath: action.payload
+            }
+        default: return state
+    }
+}
+export { AllDataReducers, ImageUrlReducer,MessageListReducer }

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import {AllDataReducers,ImageUrlReducer} from './Reducers/reducer';
+import {AllDataReducers,ImageUrlReducer,MessageListReducer} from './Reducers/reducer';
 export default combineReducers({
     AllDataReducers,
-    ImageUrlReducer
+    ImageUrlReducer,
+    MessageListReducer
 });

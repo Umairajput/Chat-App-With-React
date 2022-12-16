@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { collection, query, where, onSnapshot, addDoc, Timestamp } from "firebase/firestore";
 import { db, auth } from '../Firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
-
+import { useDispatch } from 'react-redux';
+import { MessageList } from '../Redux/Actions/action';
 import { async } from '@firebase/util';
 function Main() {
     const [curntUser, setCurntUser] = useState([])
@@ -12,8 +13,10 @@ function Main() {
     const [Name, setName] = useState()
     const [img, setImg] = useState()
     const [msg, setMsg] = useState()
-    const [messages,setMessages] = useState([])
-    const [ids,setIds] = useState("")
+    const [messages, setMessages] = useState([])
+    const [getMessageList, setGetMessageList] = useState([])
+    const dispatch = useDispatch()
+    // const [ids, setIds] = useState("")
     useEffect(() => {
         AllData();
         getData();
@@ -72,22 +75,12 @@ function Main() {
         var el = document.getElementById("box");
         el.classList.toggle("show");
     }
-    // let messages = [];
-    function getMessages() {
-        const q = query(collection(db, "messages"), where("bothUid", "==", ids))
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                setMessages(doc.data())
-            });
-            // console.log("message", messages);
-        });
-        // setMessag(messages)
-    }
-    console.log("messages",messages)
+    // console.log("messages",messages)
     const Send = async () => {
         let bothId = (localStorage.getItem("ids"))
         // console.log("bothId====>77",bothId)
-        setIds(bothId)
+        // setIds(bothId)
+        // console.log("ids====>",bothId)
         // console.log("ids===> 79",ids)
         setMsg("")
         // console.log(ids)
@@ -96,7 +89,7 @@ function Main() {
             date: Timestamp.fromDate(new Date()),
             message: msg,
             myUid: currentID,
-            bothUid: ids,
+            bothUid: bothId,
             messageType: "text",
             messageStatus: "unread"
         });
@@ -105,6 +98,32 @@ function Main() {
         // console.log("Document written with ID: ", docRef.id);
         getMessages();
     }
+    // let messageInLocalStorage;
+    const messag = [];
+    function getMessages() {
+        let ids = localStorage.getItem("ids")
+        const q = query(collection(db, "messages"), where("bothUid", "==", ids))
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            // console.log(ids, auth.currentUser.uid)
+            // console.log(querySnapshot.size)
+            querySnapshot.forEach((doc) => {
+                // console.log(doc.data())
+                messag.push(doc.data())
+                dispatch(MessageList(messag))
+                // localStorage.setItem("messageList", JSON.stringify(messag))
+                // console.log("messag", ...messag)
+            });
+            // setGetMessageList(JSON.parse(localStorage.getItem("messageList")))
+            // console.log(getMessageList)
+            // console.log("message===>",messag)
+            // setMessages(messag)
+        });
+        // setMessag(messages)
+    }
+    // let getMessageList = JSON.parse(localStorage.getItem("messageList"))
+    // messag.map((v,i)=>{
+    // console.log("hello", getMessageList)
+    // })
     // console.log("ids",ids)
     return (
         <div className='body'>
@@ -142,17 +161,17 @@ function Main() {
                             <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
-                            {/* {messages.map((v,i)=>{
+                            {getMessageList.map((v, i) => {
                                 // console.log("msg====>",v.message)
-                                return(
-                                <h4>{v?.message}</h4>
+                                return (
+                                    <h4>{v?.message}</h4>
                                 )
                             })
-                        } */}
+                            }
                         </div>
                         <div>
                             <input className='inp' type="text" placeholder='Enter Message' value={msg} onChange={(e) => { setMsg(e.target.value) }} />
-                            <button className='btn' onClick={Send}><SendOutlined className='send'/></button>
+                            <button className='btn' onClick={Send}><SendOutlined className='send' /></button>
                         </div>
                     </div>
                 </div>
