@@ -1,9 +1,13 @@
 const LOGIN_DATA = 'LOGIN_DATA';
 const IMAGE_URL = 'IMAGE_URL';
+const CURRENT_USER = 'CURRENT_USER';
+const ALL_USER = 'ALL_USER';
 const MESSAGE_LIST = 'MESSAGE_LIST';
 
 export {
     LOGIN_DATA,
     IMAGE_URL,
+    CURRENT_USER,
+    ALL_USER,
     MESSAGE_LIST
 };

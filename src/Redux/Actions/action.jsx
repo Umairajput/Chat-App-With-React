@@ -1,4 +1,4 @@
-import { LOGIN_DATA, IMAGE_URL, MESSAGE_LIST } from "../types";
+import { LOGIN_DATA, IMAGE_URL, MESSAGE_LIST ,CURRENT_USER,ALL_USER} from "../types";
 
 const LoginUserData = (loginInformation) => async (dispatch) => {
     // console.log("actionData",loginInformation)
@@ -14,6 +14,20 @@ const ImageURL = (ImagePath) => async (dispatch) => {
         payload: ImagePath
     })
 }
+const CurrentUser = (CurrentProfile) => async (dispatch) => {
+    // console.log("actionData",CurrentProfile)
+    dispatch({
+        type: CURRENT_USER,
+        payload: CurrentProfile
+    })
+}
+const AllUser = (AllUserData) => async (dispatch) => {
+    // console.log("actionData",CurrentProfile)
+    dispatch({
+        type: ALL_USER,
+        payload: AllUserData
+    })
+}
 const MessageList = (AllMessages) => async (dispatch) => {
     // console.log("actionData",AllMessages)
     dispatch({
@@ -24,5 +38,7 @@ const MessageList = (AllMessages) => async (dispatch) => {
 export {
     LoginUserData,
     ImageURL,
+    CurrentUser,
+    AllUser,
     MessageList
 };

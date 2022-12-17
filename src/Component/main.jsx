@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { MoreOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons"
 import { useSelector } from 'react-redux'
-import { collection, query, where, onSnapshot, addDoc, Timestamp,getDocs } from "firebase/firestore";
+import { collection, query, where, onSnapshot, addDoc, Timestamp, getDocs } from "firebase/firestore";
 import { db, auth } from '../Firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import { MessageList } from '../Redux/Actions/action';
+import {CurrentUser,AllUser, MessageList } from '../Redux/Actions/action';
 import { async } from '@firebase/util';
 function Main() {
-    const [curntUser, setCurntUser] = useState([])
-    const [dataArray, setDataArray] = useState([])
+    // const [curntUser, setCurntUser] = useState([])
+    // const [dataArray, setDataArray] = useState([])
     const [Name, setName] = useState()
     const [img, setImg] = useState()
     const [msg, setMsg] = useState()
-    const [messages, setMessages] = useState([])
-    const [getMessageList, setGetMessageList] = useState([])
+    const [getMessageList, setGetMessageList] = useState(false)
     const dispatch = useDispatch()
     // console.log(state)
     // const [ids, setIds] = useState("")
@@ -34,7 +33,11 @@ function Main() {
     //       // ...
     //     }
     //   });
-    // const state = useSelector((state) => state?.MessageListReducer?.AllMessages)
+    const state = useSelector((state) => state)
+    console.log("state====>",state)
+    // setTimeout(() => {
+    //     setGetMessageList(true)
+    // }, 1000)
     // console.log("state===>",state)
     // const name = state?.AllDataReducers?.loginInformation?.name;
     // const imgURL = state?.AllDataReducers?.loginInformation?.image
@@ -45,17 +48,19 @@ function Main() {
             querySnapshot?.forEach((doc) => {
                 data.push(doc?.data())
             });
-            setDataArray(data)
+            // setDataArray(data)
+            dispatch(AllUser(data))
         });
     }
     function getData() {
         let user = [];
         const q = query(collection(db, "users"), where("id", "==", auth?.currentUser?.uid));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
-            querySnapshot.forEach((doc) => {
-                user.push(doc.data());
+            querySnapshot?.forEach((doc) => {
+                user.push(doc?.data());
             });
-            setCurntUser(user)
+            // setCurntUser(user)
+            dispatch(CurrentUser(user))
         });
     }
     // console.log("All user ", dataArray);
@@ -65,7 +70,7 @@ function Main() {
         setName(name)
         setImg(image)
         if (id > currentID) {
-            localStorage.setItem("ids", id + currentID)
+            localStorage?.setItem("ids", id + currentID)
             // console.log(getIds)
         } else {
             localStorage.setItem("ids", currentID + id)
@@ -99,6 +104,9 @@ function Main() {
         // console.log("successFul")
         // console.log("Document written with ID: ", docRef.id);
         getMessages();
+        setTimeout(() => {
+            setGetMessageList(true)
+        }, 2000)
     }
     // let messageInLocalStorage;
     const messag = [];
@@ -110,8 +118,8 @@ function Main() {
             // console.log(querySnapshot.size)
             querySnapshot.forEach((doc) => {
                 // console.log(doc.data())
-                messag.push(doc.data())
-                console.log("message===>",messag)
+                messag.push(doc?.data())
+                // console.log("message===>",messag)
                 dispatch(MessageList(messag))
                 // localStorage.setItem("messageList", JSON.stringify(messag))
                 // console.log("messag", ...messag)
@@ -131,12 +139,12 @@ function Main() {
     return (
         <div className='body'>
             <div className="nav_icon">
-                {curntUser == false ? null : <div>
+                {/* {curntUser == false ? null : <div>
                     <div className='member_div test'>
                         <img className='img' src={curntUser[0]?.image} />
                         <span>{curntUser[0]?.name}</span>
                     </div>
-                </div>}
+                </div>} */}
                 <h2 className="conver_nav">Conversations</h2>
                 <div className="container">
                     <input type="text" id="box" placeholder="Search a friend" className="search__box " onClick={show} />
@@ -147,7 +155,7 @@ function Main() {
             <div>
                 <div className='main_div'>
                     <div className='members_main_div'>
-                        {
+                        {/* {
                             dataArray.map((v, i) => {
                                 return (
                                     <div onClick={() => Chat(v.name, v.id, v.image)} key={i} className='member_div'>
@@ -156,7 +164,7 @@ function Main() {
                                     </div>
                                 )
                             })
-                        }
+                        } */}
                     </div>
                     <div className='chat_main_div'>
                         <div className='chat_navbar' style={{ display: 'flex' }}>
@@ -164,8 +172,8 @@ function Main() {
                             <h2 className='h2'>{Name}</h2>
                         </div>
                         <div className='chat_div'>
-                            {/* {getMessageList.map((v, i) => {
-                                // console.log("msg====>",v.message)
+                            {/* {getMessageList === false ? null :
+                            state.map((v, i) => {
                                 return (
                                     <h4>{v?.message}</h4>
                                 )

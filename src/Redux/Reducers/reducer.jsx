@@ -1,6 +1,8 @@
 import {
     LOGIN_DATA,
     IMAGE_URL,
+    CURRENT_USER,
+    ALL_USER,
     MESSAGE_LIST
 } from '../types';
 
@@ -29,6 +31,28 @@ const ImageUrlReducer = (state = initialState, action) => {
         default: return state
     }
 }
+const CurrentUserReducer = (state = [], action) => {
+    switch (action.type) {
+        case CURRENT_USER:
+            // console.log("ReducerData", action.payload)
+            return {
+                ...state,
+                CurrentProfile: action.payload
+            }
+        default: return state
+    }
+}
+const AllUserReducer = (state = [], action) => {
+    switch (action.type) {
+        case ALL_USER:
+            // console.log("ReducerData", action.payload)
+            return {
+                ...state,
+                AllUserData: action.payload
+            }
+        default: return state
+    }
+}
 const MessageListReducer = (state = [], action) => {
     switch (action.type) {
         case MESSAGE_LIST:
@@ -40,4 +64,4 @@ const MessageListReducer = (state = [], action) => {
         default: return state
     }
 }
-export { AllDataReducers, ImageUrlReducer,MessageListReducer }
+export { AllDataReducers, ImageUrlReducer,CurrentUserReducer, AllUserReducer ,MessageListReducer }
