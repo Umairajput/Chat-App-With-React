@@ -343,7 +343,12 @@ label {
 ::-webkit-scrollbar {
   display: none;
 }
-
+.heading{
+  background-color: black;
+  color: white;
+  font-family: cursive;
+  /* display: none; */
+}
 .inp {
   border: 1px solid hsl(196deg 100% 94%);
   outline: none;

@@ -8,8 +8,10 @@ import { useDispatch } from 'react-redux';
 import { CurrentUser, AllUser, MessageList } from '../Redux/Actions/action';
 import { async } from '@firebase/util';
 function Main() {
+    let heading = document.getElementById("heading")
     // const [curntUser, setCurntUser] = useState([])
     // const [dataArray, setDataArray] = useState([])
+    const [time, setTime] = useState(false)
     const [Name, setName] = useState()
     const [img, setImg] = useState()
     const [msg, setMsg] = useState()
@@ -21,11 +23,13 @@ function Main() {
     //     AllData();
     //     getData();
     // },[])
-    // setTimeout(()=>{
-    // },1000)
+    time == false ? setTimeout(() => {
+        AllData();
+        getData();
+    }, 2000)
+        : console.log(heading)
+
     // var timeout = setTimeout(function () {
-    //     AllData();
-    //     getData();
     //     // Do something
     // }, 3000)
 
@@ -50,6 +54,7 @@ function Main() {
     // const name = state?.AllDataReducers?.loginInformation?.name;
     // const imgURL = state?.AllDataReducers?.loginInformation?.image
     function AllData() {
+        setTime(true)
         let data = []
         const q = query(collection(db, "users"), where("id", "!=", auth?.currentUser?.uid));
         // const q = query(collection(db, "users"));
@@ -64,6 +69,7 @@ function Main() {
         // clearTimeout(timeout)
     }
     function getData() {
+        setTime(true)
         let user = [];
         const q = query(collection(db, "users"), where("id", "==", auth?.currentUser?.uid));
         // const q = query(collection(db, "users"));
@@ -151,6 +157,7 @@ function Main() {
     // console.log("ids",ids)
     return (
         <div className='body'>
+            <h1 className='heading' id='heading'>This Is Made By Umair Rajput</h1>
             <div className="nav_icon">
                 {/* {curntUser == false ? null : <div>
                     <div className='member_div test'>
