@@ -5,7 +5,7 @@ import { collection, query, where, onSnapshot, addDoc, Timestamp, getDocs } from
 import { db, auth } from '../Firebase/firebase';
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from 'react-redux';
-import {CurrentUser,AllUser, MessageList } from '../Redux/Actions/action';
+import { CurrentUser, AllUser, MessageList } from '../Redux/Actions/action';
 import { async } from '@firebase/util';
 function Main() {
     // const [curntUser, setCurntUser] = useState([])
@@ -17,10 +17,19 @@ function Main() {
     const dispatch = useDispatch()
     // console.log(state)
     // const [ids, setIds] = useState("")
-    useEffect(() => {
+    // useEffect(() => {
+    //     AllData();
+    //     getData();
+    // }, [])
+    // setTimeout(()=>{
+    // },1000)
+    var timeout = setTimeout(function () {
         AllData();
         getData();
-    }, [])
+        // Do something
+    }, 3000)
+
+    // ...elsewhere...
     // onAuthStateChanged(auth, (user) => {
     //     if (user) {
     //       // User is signed in, see docs for a list of available properties
@@ -34,7 +43,6 @@ function Main() {
     //     }
     //   });
     const state = useSelector((state) => state)
-    console.log("state====>",state)
     // setTimeout(() => {
     //     setGetMessageList(true)
     // }, 1000)
@@ -44,17 +52,21 @@ function Main() {
     function AllData() {
         let data = []
         const q = query(collection(db, "users"), where("id", "!=", auth?.currentUser?.uid));
+        // const q = query(collection(db, "users"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             querySnapshot?.forEach((doc) => {
                 data.push(doc?.data())
             });
             // setDataArray(data)
             dispatch(AllUser(data))
+            // console.log("hahahha",auth?.currentUser?.uid)
         });
+        clearTimeout(timeout)
     }
     function getData() {
         let user = [];
         const q = query(collection(db, "users"), where("id", "==", auth?.currentUser?.uid));
+        // const q = query(collection(db, "users"));
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
             querySnapshot?.forEach((doc) => {
                 user.push(doc?.data());
@@ -62,6 +74,7 @@ function Main() {
             // setCurntUser(user)
             dispatch(CurrentUser(user))
         });
+        console.log("state====>", state)
     }
     // console.log("All user ", dataArray);
     // console.log("Current user ", curntUser);
