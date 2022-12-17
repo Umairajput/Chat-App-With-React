@@ -20,14 +20,14 @@ function Main() {
     // useEffect(() => {
     //     AllData();
     //     getData();
-    // }, [])
+    // },[])
     // setTimeout(()=>{
     // },1000)
-    var timeout = setTimeout(function () {
-        AllData();
-        getData();
-        // Do something
-    }, 3000)
+    // var timeout = setTimeout(function () {
+    //     AllData();
+    //     getData();
+    //     // Do something
+    // }, 3000)
 
     // ...elsewhere...
     // onAuthStateChanged(auth, (user) => {
@@ -61,7 +61,7 @@ function Main() {
             dispatch(AllUser(data))
             // console.log("hahahha",auth?.currentUser?.uid)
         });
-        clearTimeout(timeout)
+        // clearTimeout(timeout)
     }
     function getData() {
         let user = [];
