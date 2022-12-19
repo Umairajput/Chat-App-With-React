@@ -7,9 +7,8 @@ import { initializeApp } from "firebase/app";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux"
-import { LoginUserData } from "../Redux/Actions/action"
 
-function Login({ value }) {
+function Login() {
     const dispatch = useDispatch();
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
@@ -35,7 +34,7 @@ function Login({ value }) {
                 const docSnap = await getDoc(docRef);
                 if (docSnap.exists()) {
                     // console.log("Document data:", docSnap.data());
-                    dispatch(LoginUserData(docSnap.data()))
+                    // dispatch(LoginUserData(docSnap.data()))
                     navigate('/Sidebar')
                 } else {
                     console.log("No such document!");

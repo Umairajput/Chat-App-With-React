@@ -82,6 +82,7 @@ function Main() {
         });
         console.log("state====>", state)
     }
+    console.log("hello world")
     // console.log("All user ", dataArray);
     // console.log("Current user ", curntUser);
     let currentID = auth?.currentUser?.uid
